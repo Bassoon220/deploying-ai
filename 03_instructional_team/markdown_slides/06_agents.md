@@ -29,6 +29,11 @@ $ echo "Data Sciences Institute"
 2. The environment and available actions define what an agent can and cannot do; tool selection shapes both capability and risk profile.
 3. Tools fall into three categories: knowledge augmentation (retrieval, search), capability extension (calculators, code interpreters), and write actions (emails, SQL updates, transactions).
 4. Write actions are qualitatively riskier than read actions — agents that can modify their environment require explicit safeguards and human-in-the-loop oversight.
+
+---
+
+## Main Points (cont.)
+
 5. Planning is what separates agents from chatbots: good planners break complex tasks into subtasks, reason step by step, and recover from intermediate errors.
 6. Errors compound across multi-step pipelines — a small per-step failure rate produces a large end-to-end failure rate, making agent reliability a distinct engineering challenge.
 7. Agent evaluation must account for success rates across complete tasks, accumulated cost and latency, and safety outcomes for write actions — single-turn metrics are insufficient.
@@ -150,6 +155,11 @@ $ echo "Data Sciences Institute"
 2. The environment and available actions define what an agent can and cannot do; tool selection shapes both capability and risk profile.
 3. Tools fall into three categories: knowledge augmentation (retrieval, search), capability extension (calculators, code interpreters), and write actions (emails, SQL updates, transactions).
 4. Write actions are qualitatively riskier than read actions — agents that can modify their environment require explicit safeguards and human-in-the-loop oversight.
+
+---
+
+## Main Points (cont.)
+
 5. Planning is what separates agents from chatbots: good planners break complex tasks into subtasks, reason step by step, and recover from intermediate errors.
 6. Errors compound across multi-step pipelines — a small per-step failure rate produces a large end-to-end failure rate, making agent reliability a distinct engineering challenge.
 7. Agent evaluation must account for success rates across complete tasks, accumulated cost and latency, and safety outcomes for write actions — single-turn metrics are insufficient.
