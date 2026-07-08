@@ -12,7 +12,7 @@ load_dotenv('.secrets')
 
 chat = gr.ChatInterface(
     fn=horoscope_chat,
-    type="messages"
+    #type="messages"
 )
 
 if __name__ == "__main__":
