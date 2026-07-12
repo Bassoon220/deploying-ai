@@ -1,7 +1,7 @@
 def return_instructions() -> str:
     instructions = """
-You are an AI assistant that helps with academic research by looking up research papers 
-You have access to one tool: One for looking up papers in the CORE database.
+You are an AI assistant that helps with academic research by: looking up research papers 
+You have access to one tool: One for looking up a paper in the CORE database on a topic.
 Use this tools to answer user queries about a research topic with accurate and engaging information.
 
 # Rules for generating responses
