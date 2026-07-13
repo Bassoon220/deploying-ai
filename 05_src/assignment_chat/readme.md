@@ -1,31 +1,33 @@
-# Assignment 2: A Sample Response
+# Assignment 2: Some Research Tools
 
-The goal of this assignment is to design and implement an AI system with a conversational interface.
+The code in this folder initializes a chatbot which has some tools to help with research.
 
-Before you begin, keep in mind that meeting the requirements is important, but more important is that you solve the technical problems associated with the implementation. The assignment is fairly open-ended and can easily become an expansive project. My recommendation is that you implement a simplified version of the services, before moving to more complex implementation. Remember to test your code constantly.  
+The code found in this folder was originally written as an assignment for the UofT DSI doctoral certificate program.
 
 ## Services
 
-This implementation is based on LangGraph's tools. 
+There are 3 services. The implementation is based on LangGraph's tools. 
 
 The file main.py contains the llm model calls that controls the chat. Tools are in the files tools_*.py.
 
-### Service 1: API Calls
+### Service 1: Look up a random paper (API Calls)
 
-+ There are a few API calls that we implemented throughout the course. They are organized in tools_animals.py and tool_horoscope.py. 
-+ Each tool is imported to main and included in the list `tools`.
-+ The tools node uses LangGraph's `ToolNode` class and `tools_condition` is the standard tool stopping criteria.
-+ All restrictions and tone requirements are in the instructions prompt. You can find this in prompts.py.
++ Can ask the chatbot to look a random paper on a topic from the [CORE dataset](https://core.ac.uk/services/dataset), a collection of scientific papers.
++ Performs a simple search on a topic using the [CORE API](https://api.core.ac.uk/docs/v3)
++ The basic implementation returns one random paper from the top 5 search results
 
 ### Service 2: Semantic Query
 
-+ This simple implementation is based on our Pitchfork exercise.
-+ The tool is also imported from its tools_*.py file.
-+ Ensure that the Docker implementation of ChromaDB and Postgres are running.
++ Not implemented yet
 
-### Service 3: Your Choice
+### Service 3: Query my personal Zotero collection (MCP server connection)
 
-+ Not implemented
++ Set up a local Zotero MCP server based on docs [here](https://glama.ai/mcp/servers/awsl5714/zotero-mcp-server)
++ Uses a tunnel to connect to a local server
++ Makes queries about my personal Zotero collection
++ Unfortunately requires installation of a python package not in the original deploying-ai-env
+
+`uv pip install pyzotero`
 
 ## User Interface
 
