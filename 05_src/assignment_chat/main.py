@@ -13,6 +13,7 @@ from assignment_chat.prompts import return_instructions
 from assignment_chat.tools_core import query_core_api
 from assignment_chat.tools_zotero_mcp import launch_mcp_and_query
 from assignment_chat.tools_web_search import simple_web_search
+from assignment_chat.tools_semantic_query import generate_response
 
 from utils.logger import get_logger
 
@@ -39,7 +40,7 @@ chat_agent = init_chat_model(
 
 
 # add tools to a list here
-tools = [query_core_api, launch_mcp_and_query, simple_web_search]
+tools = [query_core_api, generate_response, simple_web_search, launch_mcp_and_query]
 
 # get the system prompt
 instructions = return_instructions()

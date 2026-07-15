@@ -4,6 +4,7 @@ import subprocess
 import sys
 import time
 from openai import OpenAI
+from langchain.tools import tool
 
 # ==========================================
 # CONFIGURATION
@@ -29,6 +30,7 @@ def get_client(use_gateway: bool = USE_GATEWAY) -> OpenAI:
         client = OpenAI()
     return client
 
+@tool
 def launch_mcp_and_query(user_query):
     """
     Launches a local MCP server, then queries a local zotero collection
@@ -64,7 +66,7 @@ def launch_mcp_and_query(user_query):
         text=True,
         bufsize=1 # Line-buffered for real-time streaming
     )
-    
+    print("⏳ Waiting...")
     tunnel_url = None
     
     try:

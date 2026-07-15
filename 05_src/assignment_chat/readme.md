@@ -14,14 +14,22 @@ The file main.py contains the llm model calls that controls the chat. Tools are 
 
 + Can ask the chatbot to look a random paper on a topic from the [CORE dataset](https://core.ac.uk/services/dataset), a collection of scientific papers.
 + Performs a simple search on a topic using the [CORE API](https://api.core.ac.uk/docs/v3)
-+ The basic implementation returns one random paper from the top 5 search results
++ The basic implementation returns one random paper from the top 5 search results, to not exceed model context lengths
 
-### Service 2: Semantic Query
+### Service 2: Asks for information based on a textbook (Semantic Query)
 
-+ Not implemented yet
++ Can ask about topics from a textbook, James Keeler's Understanding NMR Spectroscopy
++ First, reads the book (pdf files), then splits the text, and produces embeddings
++ These embeddings are stored in a persistent chromadb collection
++ if the collection already exists, then the embeddings shouldn't need to be recreated
++ Once the collection is created, then performs semantic search based on a user query
 
+```
+The collection is stored in "../chroma_client_assignment_chat" relative to this readme file
+The textbook pdf files are stored in "../Keeler_Understanding_NMR_Spectroscopy"
+```
 
-### Service 3: Simple Web Search
+### Service 3: Quickly search the web about a topic (Web Search)
 
 + Performs a simple web search using the [OpenAI Responses API](https://developers.openai.com/api/docs/guides/tools-web-search?lang=python)
 + Web search performed using personal OpenAI client; output summarized using client connection to DSI gateway
@@ -31,10 +39,17 @@ The file main.py contains the llm model calls that controls the chat. Tools are 
 + Set up a local Zotero MCP server based on docs [here](https://glama.ai/mcp/servers/awsl5714/zotero-mcp-server)
 + Uses a tunnel to connect to a local server
 + Makes queries about my personal Zotero collection
-+ Unfortunately requires installation of a python package not in the original deploying-ai-env
++ Unfortunately this service doesn't appear to be that reliable, I think the queries sometimes produce no results, probably because they need to be formatted a specific way and I just didn't specify that format.
++ Retrying the query sometimes works
++ Need to set up in the env files, info about my personal Zotero account (api key, id, user id)
+
++ Also unfortunately requires installation of python packages not in the original deploying-ai-env
 
 `uv pip install pyzotero`
 
++ May also need to install package mcp-proxy@6.5.3. try the code below?
+
+`uv pip install mcp-proxy`
 
 
 ## User Interface
