@@ -6,9 +6,40 @@ The code found in this folder was originally written as an assignment for the Uo
 
 ## Services
 
-There are 3 services. The implementation is based on LangGraph's tools. 
+There are 4 services. The implementation is based on LangGraph's tools. 
 
 The file main.py contains the llm model calls that controls the chat. Tools are in the files tools_*.py.
+
+### Start the chatbot
+
+1. Change directory to the folder which contains this app (assignment_chat)
+
+2. Activate the deploying_ai python environment (or y ou could do this before changing directory)
+  ```
+  Create the environment:
+  uv venv deploying-ai-env --python 3.11
+
+  Activate the environment:
+  source deployinv-ai-env/bin/activate
+
+  Install all packages:
+  uv sync active
+
+  Deactivate when done:
+  deactivate
+  ```
+
+3. Activate the client:
+```
+python -m assignment_chat.app
+```
+
+4. In the terminal, there will be a local url where the client is running (usually http://127.0.0.1:7860 I think). Use CMD + left click to open the client in a browser
+
+5. Chat with the client as needed in the browser window
+
+6. Quit the client with CTRL + C in the terminal window (or to restart it)
+
 
 ### Service 1: Look up a random paper (API Calls)
 
