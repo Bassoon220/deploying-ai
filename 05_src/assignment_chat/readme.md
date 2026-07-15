@@ -20,7 +20,13 @@ The file main.py contains the llm model calls that controls the chat. Tools are 
 
 + Not implemented yet
 
-### Service 3: Query my personal Zotero collection (MCP server connection)
+
+### Service 3: Simple Web Search
+
++ Performs a simple web search using the [OpenAI Responses API](https://developers.openai.com/api/docs/guides/tools-web-search?lang=python)
++ Web search performed using personal OpenAI client; output summarized using client connection to DSI gateway
+
+### Service 4: Query my personal Zotero collection (MCP server connection)
 
 + Set up a local Zotero MCP server based on docs [here](https://glama.ai/mcp/servers/awsl5714/zotero-mcp-server)
 + Uses a tunnel to connect to a local server
@@ -28,6 +34,8 @@ The file main.py contains the llm model calls that controls the chat. Tools are 
 + Unfortunately requires installation of a python package not in the original deploying-ai-env
 
 `uv pip install pyzotero`
+
+
 
 ## User Interface
 

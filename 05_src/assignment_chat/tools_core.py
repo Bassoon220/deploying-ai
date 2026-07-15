@@ -16,12 +16,12 @@ load_dotenv(".secrets")
 @tool
 def query_core_api(url_fragment, query, is_scroll=False, limit=5, scrollId=None):
     """
-    Queries the CORE API to perform a search of works
+    Queries the CORE API to perform a search of works based on a user query, and returns the result of one paper
 
     See example code here:
     https://github.com/oacore/apiv3-webinar
 
-    in the current implementation, I set the limit to 5, so the search result returns 5 papers
+    in the current implementation, I set the limit to 5, so the CORE search result returns 5 papers
     then randomly select just one paper to summarize, to try and stay within the context limit of gpt-4o-mini
     I think the limit of 5 papers also helps to stay with CORE API limits?
 
@@ -37,6 +37,11 @@ def query_core_api(url_fragment, query, is_scroll=False, limit=5, scrollId=None)
     url_fragment = "search/works"
     
     query = {"q":query, "limit":limit}
+
+    print("\n--- Performing CORE Query ---")
+    print(query)
+    print("-------------------------------\n")
+
     if not is_scroll:
         response = requests.post(f"{api_endpoint}{url_fragment}",data = json.dumps(query), headers=headers)
     elif not scrollId:
@@ -50,38 +55,15 @@ def query_core_api(url_fragment, query, is_scroll=False, limit=5, scrollId=None)
 
         random_paper_index = np.random.randint(limit)
         result = response.json()["results"][random_paper_index]
+
+        print("\n--- Web Search Result ---")
+        print(response.output_text)
+        print("-------------------------------\n")
+
         return result, response.elapsed.total_seconds()
         #return response.json(), response.elapsed.total_seconds()
     else:
         print(f"Error code {response.status_code}, {response.content}")
 
 
-@tool
-def get_cat_facts(n:int=1):
-    """
-    Returns n cat facts from the Meowfacts API.
-    """
-    url = "https://meowfacts.herokuapp.com/"
-    params = {
-        "count": n
-    }
-    response = requests.get(url, params=params)
-    resp_dict = json.loads(response.text)
-    facts_list = resp_dict.get("data", [])
-    facts = "\n".join([f"{i+1}. {fact}\n" for i, fact in enumerate(facts_list)])
-    return facts
 
-@tool
-def get_dog_facts(n:int=1):
-    """
-    Returns n dog facts from the Dog API.
-    """
-    url = "http://dogapi.dog/api/v2/facts"
-    params = {
-        "limit": n
-    }
-    response = requests.get(url, params=params)
-    resp_dict = json.loads(response.text)
-    facts_list = resp_dict.get("data", [])
-    facts = "\n".join([f"{i+1}. {fact['attributes']['body']}\n" for i, fact in enumerate(facts_list)])
-    return facts
