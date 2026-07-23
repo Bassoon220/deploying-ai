@@ -12,10 +12,13 @@ _logs = get_logger(__name__)
 load_dotenv(".env")
 load_dotenv(".secrets")
 
+#USE_GATEWAY = (os.getenv('USE_GATEWAY', 'FALSE').upper() == 'TRUE')
+#client = OpenAI()
+client = OpenAI(base_url='https://k7uffyg03f.execute-api.us-east-1.amazonaws.com/prod/openai/v1',
+                    api_key='any value',
+                    default_headers={"x-api-key": os.getenv('API_GATEWAY_KEY')})
 
-client = OpenAI()
-
-open_ai_model = os.getenv("OPENAI_MODEL", "gpt-4")
+open_ai_model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 
 tools = [
     {

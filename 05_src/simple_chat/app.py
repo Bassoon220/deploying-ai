@@ -7,12 +7,21 @@ import os
 from langchain.chat_models import init_chat_model
 
 load_dotenv('.secrets')
+load_dotenv('.env')
 
-if not os.environ.get("OPENAI_API_KEY"):
-    raise ValueError("Missing OPENAI_API_KEY environment variable")
+#if not os.environ.get("OPENAI_API_KEY"):
+#    raise ValueError("Missing OPENAI_API_KEY environment variable")
+if not os.environ.get("API_GATEWAY_KEY"):
+    raise ValueError("Missing API_GATEWAY_KEY environment variable")
 
-llm = init_chat_model("gpt-4o-mini", model_provider="openai")
-
+#llm = init_chat_model("gpt-4o-mini", model_provider="openai")
+llm = init_chat_model(
+    "gpt-4o-mini",
+    model_provider="openai",
+    base_url='https://k7uffyg03f.execute-api.us-east-1.amazonaws.com/prod/openai/v1',
+    api_key="any",
+    default_headers={"x-api-key": os.getenv('API_GATEWAY_KEY')}
+)
 
 def simple_chat(message: str, history: list[dict]) -> str:
     langchain_messages = []
@@ -29,5 +38,6 @@ def simple_chat(message: str, history: list[dict]) -> str:
 
     
 gr.ChatInterface(
-    fn=simple_chat
+    fn=simple_chat,
+    type="messages"
 ).launch()
